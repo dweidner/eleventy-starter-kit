@@ -1,0 +1,31 @@
+{%- set links = collections.all|eleventyNavigation -%}
+
+<nav class="c-nav" role="navigation" data-component="navigation">
+  <button
+    type="button"
+    class="c-nav__toggle-button"
+    aria-expanded="false"
+    aria-controls="site-navigation"
+  >
+    <span class="u-sr-only">
+      Menu
+    </span>
+    <span class="c-menu-icon">
+      <span class="c-menu-icon__bar"></span>
+      <span class="c-menu-icon__bar"></span>
+      <span class="c-menu-icon__bar"></span>
+    </span>
+  </button>
+
+  <ul id="site-navigation" class="c-nav__menu">
+    {%- for link in links %}
+      {% set isCurrent = (link.url == page.url) %}
+      {% set isAncestor = (link.url != '/') and (link.url in page.url) %}
+      <li class="c-nav__item{% if isCurrent or isParent %} c-nav__item--active{% endif %}">
+        <a href="{{ link.url|url }}" class="c-nav__link"{% if isCurrent %} aria-current="page"{% endif %}>
+          {{ link.title }}
+        </a>
+      </li>
+    {%- endfor %}
+  </ul>
+</nav>

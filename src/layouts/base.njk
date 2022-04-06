@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html class="@{{ layout }} no-js" lang="{{ site.language|default('en') }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  {%- block title %}
+    <title>
+      {{ title }} | {{ site.name }}
+    </title>
+  {%- endblock -%}
+
+  {%- block hints %}
+    <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/assets/fonts/charter-regular.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/assets/fonts/charter-bold.woff2">
+    <link rel="preload" as="script" crossorigin="anonymous" href="/assets/scripts/vendor.js">
+    <link rel="preload" as="script" crossorigin="anonymous" href="/assets/scripts/main.modern.js">
+  {%- endblock -%}
+
+  {%- block styles %}
+    <link rel="stylesheet" href="/assets/styles/main.css">
+  {%- endblock -%}
+
+  {%- block meta %}
+    {% include "meta.njk" %}
+  {%- endblock %}
+</head>
+<body>
+  <a href="#main" class="c-skip-link">
+    Skip to content
+  </a>
+
+  <div class="c-wrapper" role="document">
+    {%- block header %}
+      {% include "header.njk" %}
+    {%- endblock -%}
+
+    <main id="main" class="c-main" role="main" tabindex="-1">
+      {%- block content %}
+        {{ content|safe }}
+      {%- endblock -%}
+    </main>
+
+    {%- block footer %}
+      {% include "footer.njk" %}
+    {%- endblock %}
+  </div>
+
+  {%- block scripts %}
+    {# Polyfill for `nomodule` in Safari 10.1 #}
+    <script type="module">
+      !function(e,t,n){!("noModule"in(t=e.createElement("script")))&&"onbeforeload"in t&&(n=!1,e.addEventListener("beforeload",function(e){if(e.target===t)n=!0;else if(!e.target.hasAttribute("nomodule")||!n)return;e.preventDefault()},!0),t.type="module",t.src=".",e.head.appendChild(t),t.remove())}(document)
+    </script>
+
+    {# Modern Browsers: Chrome >=60, Firefox >=54, Edge >=15, Safari >=10.1 #}
+    <script type="module" src="/assets/scripts/main.modern.js"></script>
+
+    {# Legacy Browsers: Edge <15, IE 11, Safari <10.1 #}
+    <script src="/assets/scripts/main.legacy.js" nomodule defer></script>
+  {%- endblock %}
+</body>
+</html>

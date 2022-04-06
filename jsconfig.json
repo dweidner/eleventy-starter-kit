@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "ES6"
+  },
+  "include": [
+    "src/**/*",
+    "eleventy/**/*"
+  ],
+  "exclude": [
+    "dist",
+    "node_modules"
+  ]
+}

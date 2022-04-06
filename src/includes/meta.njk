@@ -1,0 +1,57 @@
+{%- set item = collections.all|getCollectionItem(page) -%}
+{%- set excerpt = item.templateContent|striptags|truncate(160) -%}
+
+{%- set twitter = organization.sameAs.twitter -%}
+{%- set facebook = organization.sameAs.facebook %}
+
+<meta name="description" content="{{ description|default(excerpt, true) }}">
+<meta name="date" content="{{ page.date|iso8601 }}">
+
+<link rel="canonical" href="{{ page.url|url|absolute_url }}">
+
+{%- if pagination.href.previous %}
+  <link rel="prev" href="{{ pagination.href.previous|url|absolute_url }}">
+{%- endif %}
+
+{%- if pagination.href.next %}
+  <link rel="next" href="{{ pagination.href.next|url|absolute_url }}">
+{%- endif %}
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+<link rel="apple-touch-icon" href="/assets/images/favicon-192x192.png">
+
+<meta name="application-name" content="{{ site.name }}" />
+<meta name="theme-color" content="{{ site.backgroundColor }}" />
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="{{ site.locale|default('en_US') }}">
+<meta property="og:title" content="{{ title }}">
+<meta property="og:description" content="{{ description|default(excerpt, true) }}">
+<meta property="og:url" content="{{ page.url|url|absolute_url }}">
+<meta property="og:site_name" content="{{ site.name }}">
+
+{%- for image in images|take(6) %}
+  <meta property="og:image" content="{{ image|url|absolute_url }}">
+{%- else %}
+  <meta property="og:image" content="{{ site.images|first|url|absolute_url }}">
+{%- endfor %}
+
+{%- for video in videos|take(6) %}
+  <meta property="og:video" content="{{ video|url|absolute_url }}" >
+{%- endfor %}
+
+{%- if images|length %}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="{{ images|first|url|absolute_url }}">
+{%- elif site.images|length %}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="{{ site.images|first|url|absolute_url }}">
+{%- else %}
+  <meta name="twitter:card" content="summary">
+{%- endif %}
+
+{%- if twitter %}
+  <meta name="twitter:site" content="@{{ twitter.name }}">
+  <meta name="twitter:creator" content="@{{ twitter.name }}">
+{%- endif %}

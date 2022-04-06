@@ -1,0 +1,59 @@
+{
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 2020
+  },
+  "env": {
+    "es6": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:import/recommended",
+    "plugin:jsdoc/recommended"
+  ],
+  "rules": {
+    "indent": ["error", 2],
+    "semi": ["error", "always"],
+    "quotes": ["error", "single"],
+    "linebreak-style": ["error", "unix"],
+    "no-unused-vars": ["error", {"ignoreRestSiblings": true}],
+    "jsdoc/require-returns-description": ["off"]
+  },
+  "overrides": [
+    {
+      "files": [
+        "eleventy/**/*.js",
+        "src/data/**/*.js",
+        "src/**/*.11ty.js",
+        "src/**/*.11tydata.js"
+      ],
+      "env": {
+        "node": true
+      },
+      "extends": [
+        "plugin:node/recommended"
+      ]
+    },
+    {
+      "files": [
+        "src/assets/scripts/**/*.js"
+      ],
+      "env": {
+        "browser": true
+      },
+      "extends": [
+        "plugin:compat/recommended"
+      ]
+    }
+  ],
+  "settings": {
+    "jsdoc": {
+      "mode": "typescript"
+    },
+    "polyfills": [
+      "Promise",
+      "fetch"
+    ]
+  }
+}
