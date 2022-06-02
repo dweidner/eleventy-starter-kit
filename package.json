@@ -55,7 +55,7 @@
     "@11ty/eleventy": "^1.0.0",
     "@11ty/eleventy-img": "^2.0.0",
     "@11ty/eleventy-navigation": "^0.3.3",
-    "@babel/core": "^7.17.8",
+    "@babel/core": "^7.18.2",
     "@babel/eslint-parser": "^7.17.0",
     "@babel/plugin-transform-runtime": "^7.17.10",
     "@babel/preset-env": "^7.18.2",
