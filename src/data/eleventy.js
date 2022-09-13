@@ -1,4 +1,4 @@
 module.exports = {
   environment: process.env.NODE_ENV || 'development',
-  buildDate: new Date()
+  buildDate: new Date(),
 };

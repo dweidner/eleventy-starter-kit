@@ -13,6 +13,6 @@ module.exports = {
     streetAddress: 'Street Adress 14',
     postalCode: '12345',
     locality: 'Bremen',
-    addressCountry: 'DE'
-  }
+    addressCountry: 'DE',
+  },
 };

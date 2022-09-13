@@ -10,7 +10,7 @@ function slug(string) {
   return slugify(string, {
     replacement: '-',
     lower: true,
-    remove: /[!"'()*+.:?@~]/g
+    remove: /[!"'()*+.:?@~]/g,
   });
 }
 

@@ -45,8 +45,8 @@ function minifyHTML(content) {
       useShortDoctype: true,
       processScripts: [
         'application/json',
-        'application/ld+json'
-      ]
+        'application/ld+json',
+      ],
     });
   }
 

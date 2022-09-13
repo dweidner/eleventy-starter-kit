@@ -9,5 +9,5 @@ module.exports = {
   order: 0,
   tags: [],
   images: [],
-  videos: []
+  videos: [],
 };

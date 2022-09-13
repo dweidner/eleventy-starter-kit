@@ -1,12 +1,4 @@
 {
-  "parser": "@babel/eslint-parser",
-  "parserOptions": {
-    "sourceType": "module",
-    "ecmaVersion": 2020
-  },
-  "env": {
-    "es6": true
-  },
   "extends": [
     "eslint:recommended",
     "plugin:import/recommended",
@@ -17,6 +9,7 @@
     "semi": ["error", "always"],
     "quotes": ["error", "single"],
     "linebreak-style": ["error", "unix"],
+    "comma-dangle": ["error", "always-multiline"],
     "no-unused-vars": ["error", {"ignoreRestSiblings": true}],
     "jsdoc/require-returns-description": ["off"]
   },
@@ -26,34 +19,40 @@
         "eleventy/**/*.js",
         "src/data/**/*.js",
         "src/**/*.11ty.js",
-        "src/**/*.11tydata.js"
+        "src/**/*.11tydata.js",
+        "eleventy.config.js"
       ],
       "env": {
-        "node": true
+        "node": true,
+        "es6": true
       },
       "extends": [
         "plugin:node/recommended"
-      ]
+      ],
+      "parserOptions": {
+        "ecmaVersion": 2020
+      }
     },
     {
       "files": [
         "src/assets/scripts/**/*.js"
       ],
       "env": {
-        "browser": true
+        "browser": true,
+        "es6": true
       },
       "extends": [
         "plugin:compat/recommended"
-      ]
+      ],
+      "parserOptions": {
+        "sourceType": "module",
+        "ecmaVersion": 2020
+      }
     }
   ],
   "settings": {
     "jsdoc": {
       "mode": "typescript"
-    },
-    "polyfills": [
-      "Promise",
-      "fetch"
-    ]
+    }
   }
 }

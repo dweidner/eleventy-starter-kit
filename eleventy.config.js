@@ -1,31 +1,33 @@
-const eleventyNavigationPlugin = require('@11ty/eleventy-navigation');
+const EleventyNavigationPlugin = require('@11ty/eleventy-navigation');
+const EleventyVitePlugin = require('@11ty/eleventy-plugin-vite');
 
 const {config} = require('dotenv');
 const {sortBy} = require('lodash');
 const {format} = require('util');
 
 /**
- * @param { import('@11ty/eleventy/src/UserConfig') } eleventy
+ * @param {import('@11ty/eleventy/src/UserConfig')} eleventy
  */
 module.exports = function (eleventy) {
   // Environment variables
   config();
 
+  // Passthrough Copies
+  eleventy.addPassthroughCopy('src/assets/fonts');
+  eleventy.addPassthroughCopy('src/assets/images');
+  eleventy.addPassthroughCopy('src/assets/styles');
+  eleventy.addPassthroughCopy('src/assets/scripts');
+
   // Plugins
-  eleventy.addPlugin(eleventyNavigationPlugin);
+  eleventy.setServerPassthroughCopyBehavior('copy');
+
+  eleventy.addPlugin(EleventyNavigationPlugin);
+  eleventy.addPlugin(EleventyVitePlugin);
 
   // Layouts
   eleventy.addLayoutAlias('base', 'base.njk');
   eleventy.addLayoutAlias('post', 'post.njk');
   eleventy.addLayoutAlias('page', 'page.njk');
-
-  // Passthrough Copies
-  eleventy.addPassthroughCopy('src/assets/fonts');
-  eleventy.addPassthroughCopy('src/assets/images');
-
-  // Watch Targets
-  eleventy.addWatchTarget('src/assets/styles');
-  eleventy.addWatchTarget('src/assets/scripts');
 
   // Collections
   eleventy.addCollection('sitemap', require('./eleventy/collections/sitemap'));
@@ -59,12 +61,10 @@ module.exports = function (eleventy) {
   eleventy.addShortcode('icon', require('./eleventy/shortcodes/icon'));
   eleventy.addShortcode('image', require('./eleventy/shortcodes/image'));
 
-  // Template Formats
-  eleventy.addExtension('bundle.css', require('./eleventy/extensions/postcss'));
-  eleventy.addExtension('bundle.js', require('./eleventy/extensions/rollup'));
-
   // Transforms
   eleventy.addTransform('minify-html', require('./eleventy/transforms/minify-html'));
+
+  // Servers
 
   return {
     dir: {
@@ -72,16 +72,14 @@ module.exports = function (eleventy) {
       output: 'dist',
       includes: 'includes',
       layouts: 'layouts',
-      data: 'data'
+      data: 'data',
     },
     templateFormats: [
       'njk',
       'md',
       '11ty.js',
-      'bundle.js',
-      'bundle.css'
     ],
     markdownTemplateEngine: 'njk',
-    htmlTemplateEngine: 'njk'
+    htmlTemplateEngine: 'njk',
   };
 };

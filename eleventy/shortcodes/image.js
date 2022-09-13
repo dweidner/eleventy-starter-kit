@@ -13,12 +13,12 @@ const ImagePresets = {
       1680,
       1280,
       768,
-      380
+      380,
     ],
     sizes: [
-      '100vw'
-    ]
-  }
+      '100vw',
+    ],
+  },
 };
 
 /**
@@ -38,14 +38,14 @@ function imageShortcode(source, options = {}) {
     classes = 'image',
     loading = 'lazy',
     alt = '',
-    preset = null
+    preset = null,
   } = options;
 
   const {
     formats = ['webp', 'jpeg'],
     widths = [1920],
     sizes = ['100vw'],
-    quality = 80
+    quality = 80,
   } = ImagePresets[preset] ?? {};
 
   const fileName = path.join('src', source);
@@ -58,22 +58,22 @@ function imageShortcode(source, options = {}) {
     outputDir: path.join('dist', fileDirectory),
     sharpPngOptions: {
       quality,
-      progressive: true
+      progressive: true,
     },
     sharpJpegOptions: {
       quality,
       mozjpeg: true,
-      progressive: true
+      progressive: true,
     },
     sharpWebpOptions: {
-      quality
+      quality,
     },
     filenameFormat(id, source_, width, format) {
       const extension = path.extname(source_);
       const name = path.basename(source_, extension);
 
       return `${name}-${width}w.${format}`;
-    }
+    },
   };
 
   // Generate the image asynchronously to avoid problems in Nunjuck templates.
@@ -86,7 +86,7 @@ function imageShortcode(source, options = {}) {
     alt,
     sizes: sizes.join(', '),
     loading,
-    decoding: (loading === 'lazy' ? 'async' : 'sync')
+    decoding: (loading === 'lazy' ? 'async' : 'sync'),
   };
 
   return Image.generateHTML(metadata, attributes);

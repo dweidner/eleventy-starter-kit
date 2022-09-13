@@ -8,15 +8,15 @@ class WebManifest {
       manifest: {
         display: 'minimal-ui',
         orientation: 'any',
-        startUrl: '/'
+        startUrl: '/',
       },
-      eleventyExcludeFromCollections: true
+      eleventyExcludeFromCollections: true,
     };
   }
 
   exists(uri) {
     return fs.existsSync(
-      path.resolve('src', path.isAbsolute(uri) ? `./${uri}` : uri)
+      path.resolve('src', path.isAbsolute(uri) ? `./${uri}` : uri),
     );
   }
 
@@ -29,7 +29,7 @@ class WebManifest {
       src: uri,
       ...(extension && { type: `image/${extension}` }),
       ...(dimensions && { sizes: dimensions }),
-      ...(maskable && { purpose: 'maskable' })
+      ...(maskable && { purpose: 'maskable' }),
     };
   }
 
@@ -46,7 +46,7 @@ class WebManifest {
       background_color: site.backgroundColor,
       icons: site.icons
         .filter((file) => this.exists(file))
-        .map((file) => this.stats(file))
+        .map((file) => this.stats(file)),
     });
   }
 }

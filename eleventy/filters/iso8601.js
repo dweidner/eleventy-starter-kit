@@ -14,11 +14,11 @@ function iso8601(value) {
   return dateTime
     .set({
       seconds: 0,
-      milliseconds: 0
+      milliseconds: 0,
     })
     .toISO({
       suppressSeconds: true,
-      suppressMilliseconds: true
+      suppressMilliseconds: true,
     });
 }
 

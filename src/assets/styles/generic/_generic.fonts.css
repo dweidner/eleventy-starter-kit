@@ -16,8 +16,8 @@
   font-weight: 400;
   font-style: normal;
   src:
-    url("../fonts/charter-regular.woff2") format("woff2"),
-    url("../fonts/charter-regular.woff") format("woff");
+    url("/assets/fonts/charter-regular.woff2") format("woff2"),
+    url("/assets/fonts/charter-regular.woff") format("woff");
   font-display: swap;
 }
 
@@ -26,8 +26,8 @@
   font-weight: 400;
   font-style: italic;
   src:
-    url("../fonts/charter-italic.woff2") format("woff2"),
-    url("../fonts/charter-italic.woff") format("woff");
+    url("/assets/fonts/charter-italic.woff2") format("woff2"),
+    url("/assets/fonts/charter-italic.woff") format("woff");
   font-display: optional;
 }
 
@@ -36,8 +36,8 @@
   font-weight: 700;
   font-style: normal;
   src:
-    url("../fonts/charter-bold.woff2") format("woff2"),
-    url("../fonts/charter-bold.woff") format("woff");
+    url("/assets/fonts/charter-bold.woff2") format("woff2"),
+    url("/assets/fonts/charter-bold.woff") format("woff");
   font-display: swap;
 }
 
@@ -46,7 +46,7 @@
   font-weight: 700;
   font-style: italic;
   src:
-    url("../fonts/charter-bold-italic.woff2") format("woff2"),
-    url("../fonts/charter-bold-italic.woff") format("woff");
+    url("/assets/fonts/charter-bold-italic.woff2") format("woff2"),
+    url("/assets/fonts/charter-bold-italic.woff") format("woff");
   font-display: optional;
 }

@@ -1,4 +1,2 @@
 dist/
-postcss.config.js
-rollup.config.js
-stylelint.config.js
+eleventy.config.js

@@ -1,8 +1,8 @@
 module.exports = {
   layout: 'page',
   tags: [
-    'page'
+    'page',
   ],
   draft: false,
-  sitemap: true
+  sitemap: true,
 };
