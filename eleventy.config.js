@@ -12,17 +12,32 @@ module.exports = function (eleventy) {
   // Environment variables
   config();
 
+  // Plugins
+  eleventy.addPlugin(EleventyNavigationPlugin);
+  eleventy.addPlugin(EleventyVitePlugin, {
+    tempFolderName: 'node_modules/.11ty-vite',
+    viteOptions: {
+      appType: 'custom',
+      cacheDir: 'node_modules/.vite',
+      publicDir: process.env.VITE_PUBLIC_DIRECTORY || 'public',
+      envDir: '..',
+      envPrefix: 'APP_',
+      logLevel: 'warn',
+      build: {
+        assetsDir: process.env.VITE_ASSETS_DIRECTORY || 'assets',
+        assetsInlineLimit: 0,
+      },
+    },
+  });
+
   // Passthrough Copies
   eleventy.addPassthroughCopy('src/assets/fonts');
-  eleventy.addPassthroughCopy('src/assets/images');
   eleventy.addPassthroughCopy('src/assets/styles');
   eleventy.addPassthroughCopy('src/assets/scripts');
+  eleventy.addPassthroughCopy('src/assets/static');
 
-  // Plugins
+  // Server Configuration
   eleventy.setServerPassthroughCopyBehavior('copy');
-
-  eleventy.addPlugin(EleventyNavigationPlugin);
-  eleventy.addPlugin(EleventyVitePlugin);
 
   // Layouts
   eleventy.addLayoutAlias('base', 'base.njk');
@@ -38,6 +53,7 @@ module.exports = function (eleventy) {
 
   eleventy.addFilter('absolute_url', require('./eleventy/filters/absolute-url'));
   eleventy.addFilter('append', require('./eleventy/filters/append'));
+  eleventy.addFilter('asset_path', require('./eleventy/filters/asset-path'));
   eleventy.addFilter('at_least', require('./eleventy/filters/at-least'));
   eleventy.addFilter('at_most', require('./eleventy/filters/at-most'));
   eleventy.addFilter('date', require('./eleventy/filters/date'));
@@ -50,6 +66,7 @@ module.exports = function (eleventy) {
   eleventy.addFilter('obfuscate', require('./eleventy/filters/obfuscate'));
   eleventy.addFilter('pluck', require('./eleventy/filters/pluck'));
   eleventy.addFilter('prepend', require('./eleventy/filters/prepend'));
+  eleventy.addFilter('public_path', require('./eleventy/filters/public-path'));
   eleventy.addFilter('skip', require('./eleventy/filters/skip'));
   eleventy.addFilter('slug', require('./eleventy/filters/slug'));
   eleventy.addFilter('take', require('./eleventy/filters/take'));
@@ -63,8 +80,6 @@ module.exports = function (eleventy) {
 
   // Transforms
   eleventy.addTransform('minify-html', require('./eleventy/transforms/minify-html'));
-
-  // Servers
 
   return {
     dir: {

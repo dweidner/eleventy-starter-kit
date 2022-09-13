@@ -4,7 +4,9 @@ const fs = require('node:fs');
 class WebManifest {
   data() {
     return {
-      permalink: '/manifest.webmanifest',
+      permalink: ({ vite }) => (
+        `/${vite.publicDir}/manifest.webmanifest`
+      ),
       manifest: {
         display: 'minimal-ui',
         orientation: 'any',
@@ -12,12 +14,6 @@ class WebManifest {
       },
       eleventyExcludeFromCollections: true,
     };
-  }
-
-  exists(uri) {
-    return fs.existsSync(
-      path.resolve('src', path.isAbsolute(uri) ? `./${uri}` : uri),
-    );
   }
 
   stats(uri) {
@@ -33,7 +29,7 @@ class WebManifest {
     };
   }
 
-  render({ site, manifest }) {
+  render({ site, vite, manifest }) {
     return JSON.stringify({
       name: site.name,
       short_name: site.shortName,
@@ -45,7 +41,12 @@ class WebManifest {
       theme_color: site.themeColor,
       background_color: site.backgroundColor,
       icons: site.icons
-        .filter((file) => this.exists(file))
+        .map((file) => (
+          path.isAbsolute(file)
+            ? path.resolve('src', vite.publicDir, file)
+            : path.resolve('src', file)
+        ))
+        .filter((file) => fs.existsSync(file))
         .map((file) => this.stats(file)),
     });
   }
