@@ -4,7 +4,7 @@
  * @param {string} uri The URI to convert.
  * @returns {string}
  */
- function assetPath(uri) {
+function assetPath(uri) {
   const base = this.ctx?.vite?.assetsDir ?? 'assets';
   const path = uri.trimStart('/');
 
