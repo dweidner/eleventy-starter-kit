@@ -52,7 +52,7 @@
     "lint:styles": "stylelint 'src/assets/styles/**/*.css'"
   },
   "dependencies": {
-    "@11ty/eleventy": "^1.0.0",
+    "@11ty/eleventy": "^2.0.1",
     "@11ty/eleventy-img": "^2.0.1",
     "@11ty/eleventy-navigation": "^0.3.5",
     "@babel/core": "^7.23.9",
